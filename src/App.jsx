@@ -1,8 +1,15 @@
+import { useState } from "react";
+
 function App() {
-  
+  const [toggleModal, setToggleModal] = useState(false);
+
+  function handleToggleModal() {
+    setToggleModal(!toggleModal);
+  }
+
 
   return (
-    <>
+   <>
   <meta charSet="UTF-8" />
   <meta
     name="viewport"
@@ -36,6 +43,16 @@ https://templatemo.com/tm-570-chain-app-dev
   <link rel="stylesheet" href="assets/css/templatemo-chain-app-dev.css" />
   <link rel="stylesheet" href="assets/css/animated.css" />
   <link rel="stylesheet" href="assets/css/owl.css" />
+
+  {/* <div className="preloader-inner">
+    <span className="dot" />
+    <div className="dots">
+      <span />
+      <span />
+      <span />
+    </div>
+  </div> */}
+
   {/* ***** Header Area Start ***** */}
   <header
     className="header-area header-sticky wow slideInDown"
@@ -72,7 +89,8 @@ https://templatemo.com/tm-570-chain-app-dev
               </li>
               <li>
                 <div className="gradient-button">
-                  <a id="modal_trigger" href="#modal">
+                  <a id="modal_trigger" href="#modal" onClick={handleToggleModal}>
+
                     <i className="fa fa-sign-in-alt" /> Sign In Now
                   </a>
                 </div>
@@ -88,10 +106,31 @@ https://templatemo.com/tm-570-chain-app-dev
     </div>
   </header>
   {/* ***** Header Area End ***** */}
-  <div id="modal" className="popupContainer" style={{ display: "none" }}>
+  <div
+  id="modal"
+  className="popupContainer"
+  style={
+    toggleModal
+      ? {
+          display: "block",
+          position: "fixed",
+          opacity: 1,
+          zIndex: 11000,
+          left: "50%",
+          marginLeft: "-165px",
+          top: 100,
+        }
+      : {
+          display: "none",
+        }
+  }
+>
+
+
     <div className="popupHeader">
       <span className="header_title">Login</span>
-      <span className="modal_close">
+      <span className="modal_close" onClick={handleToggleModal}>
+
         <i className="fa fa-times" />
       </span>
     </div>
@@ -929,15 +968,17 @@ https://templatemo.com/tm-570-chain-app-dev
       </div>
     </div>
   </footer>
-  {/* Scripts */}
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/owl-carousel.js"></script>
-  <script src="assets/js/animation.js"></script>
-  <script src="assets/js/imagesloaded.js"></script>
-  <script src="assets/js/popup.js"></script>
-  <script src="assets/js/custom.js"></script>
+<div
+  id="lean_overlay"
+  style={
+    toggleModal
+      ? { display: "block", opacity: "0.6" }
+      : { display: "none" }
+  }
+/>
 </>
+
+
 
   )
 }
